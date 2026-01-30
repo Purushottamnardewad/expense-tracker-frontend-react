@@ -4,6 +4,7 @@ import API_BASE_URL, { getAuthHeaders } from '../api/api';
 import { logout } from '../utils/auth';
 import ExpenseForm from '../components/ExpenseForm';
 import ExpenseTable from '../components/ExpenseTable';
+import ExpenseChart from '../components/ExpenseChart';
 
 function Dashboard() {
   const [expenses, setExpenses] = useState([]);
@@ -69,7 +70,7 @@ function Dashboard() {
 
       <div className="card">
         <h3>Expense Distribution</h3>
-        <p>Chart coming soon...</p>
+        <ExpenseChart expenses={expenses} />
       </div>
     </div>
   );
