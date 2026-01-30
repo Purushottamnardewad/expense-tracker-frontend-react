@@ -5,9 +5,11 @@ function ExpenseForm({ onExpenseAdded }) {
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState('');
   const [comment, setComment] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
 
     try {
       const res = await fetch(`${API_BASE_URL}/expenses`, {
@@ -31,6 +33,8 @@ function ExpenseForm({ onExpenseAdded }) {
       }
     } catch (error) {
       alert('Failed to add expense. Please try again.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -58,7 +62,9 @@ function ExpenseForm({ onExpenseAdded }) {
         value={comment}
         onChange={(e) => setComment(e.target.value)}
       />
-      <button type="submit" className="primary-btn">Add Expense</button>
+      <button type="submit" className="primary-btn" disabled={submitting}>
+        {submitting ? 'Adding...' : 'Add Expense'}
+      </button>
     </form>
   );
 }
