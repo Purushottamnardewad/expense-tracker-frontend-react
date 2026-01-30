@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API_BASE_URL, { getAuthHeaders } from '../api/api';
 import { logout } from '../utils/auth';
+import ExpenseForm from '../components/ExpenseForm';
+import ExpenseTable from '../components/ExpenseTable';
 
 function Dashboard() {
   const [expenses, setExpenses] = useState([]);
@@ -53,7 +55,7 @@ function Dashboard() {
 
       <div className="card">
         <h3>Add New Expense</h3>
-        <p>Form coming soon...</p>
+        <ExpenseForm onExpenseAdded={fetchExpenses} />
       </div>
 
       <div className="card">
@@ -61,7 +63,7 @@ function Dashboard() {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <p>{expenses.length} expense(s) loaded. Table coming soon...</p>
+          <ExpenseTable expenses={expenses} onExpenseDeleted={fetchExpenses} />
         )}
       </div>
 
